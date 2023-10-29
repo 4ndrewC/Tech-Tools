@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <title>TL3: Evidence</title>
+        <link rel = "stylesheet" href = "../public/main.css">
+        <link rel = "icon" type = "image/png" href = "/images/favicon.png">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1">
+        <meta charset = "utf-8">
+    </head>
+    <body>
+        <div id = "topbar">
+            <h1>BIBS·C Tech Tools</h1>
+        </div> 
+        <div id = "navbar">
+            <ul id = "nav">
+                <a href = "/"><li>Home</li><div class = "underline"></div></a>
+                <a href = "/tl1"><li>Knowing (TL1)</li><div class = "underline"></div></a>
+                <a href = "/tl2"><li>Strategies (TL2)</li><div class = "underline"></div></a>
+                <a href = "/tl3"><li>Evidence (TL3)</li><div class = "underline"></div></a>
+                <a href = "/tl4"><li>Crafting (TL4)</li><div class = "underline"></div></a>
+                <span id = "search">
+                    <form action="/searchpage/:query" method="get">
+                        <input type="text" name="query" placeholder="Search">
+                        <input type="submit" value="Search">
+                    </form>    
+                </span>     
+            </ul>           
+        </div>
+        <div id = "subhead">
+            <h1 id="test">TL3: Evidence for Learning</h1>
+            <h3>Filter by strand:</h3>
+            <form class = "filters" method = "post" action='/tl3'>
+                <div class = "label">
+                    <span class = "n1">Reflect on Thinking <input type = "checkbox" name = "s1" class = "checkf" value = "1" onchange='this.form.submit()'></span>
+                    <div class = "overlay">Teachers provide clearly signaled opportunities for students to reflect on their own thinking, and that of others, explaining and justifying their opinions.</div>
+                </div>
+                <div class = "label">
+                    <span class = "n2">Evidence of Student Learning <input type = "checkbox" name = "s2" class = "checkf" value = "1" onchange='this.form.submit()'></span>
+                    <div class = "overlay">Teachers use evidence of student learning to make judgments on student achievement against stated objectives.</div>
+                </div>
+                <div class = "label">
+                    <span class = "n3">Employ Feedback <input type = "checkbox" name = "s3" class = "checkf" value = "1" onchange='this.form.submit()'></span>
+                    <div class = "overlay">Teachers employ feedback constructively to encourage self-reflection and self-assessment.</div>
+                </div>
+            </form>
+        </div>
+
+        <div id = "bar">&nbsp;</div>
+
+        <div id = "all">
+            <br>    
+            <div class = "techtip-wrap">
+                <% let add = 0; %>
+
+                <% for(let i=0; i<content[0].length; i++){ %>
+                <% if((content[1][i]["RoThink"]&&checked[0])||(content[1][i]["EoST"]&&checked[1])||(content[1][i]["EF"]&&checked[2])&&checked[3]){ %>
+                <% add++ %>
+                <div class = "techtip">
+                    <div class = "line" id = "<%=content[0][i]["id"]%>"></div>
+                    <h3 class="name"><%= content[0][i]["techname"] %></h3>
+                    <div class = "tags">
+                        <% if(content[1][i]["RoThink"]){ %>
+                            <span class = "n1">Reflect on Thinking</span>
+                        <% } %>
+                        <% if(content[1][i]["EoST"]){ %>
+                            <span class = "n2">Evidence of Student Learning</span>
+                        <% } %>
+                        <% if(content[1][i]["EF"]){ %>
+                            <span class = "n3">Employ Feedback</span>
+                        <% } %>
+                    </div>
+                    <div class = "info">
+                        <div class = "img"><img src = "/testuploads/<%=content[0][i]["id"]%>.png"></div>
+                        <div class = "desc"><%= content[0][i]["tl3_desc"] %></div>
+                        <div class = "link">
+                            <ul>
+                                <li><a href = "<%= content[0][i]["link"] %>"  target="_blank"><%= content[0][i]["displaytext"] %></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <% } %> 
+                <% } %> 
+                <% if(add==0){ %>
+                    <div>
+                        <h4>No results here match your filters.</h4>
+                    </div>
+                <% } %>
+            </div>
+            <br>
+        </div>
+        <footer>
+			<p>
+				<a href = "/tl1">Knowing (TL1)</a> | 
+				<a href = "/tl2">Strategies (TL2)</a> |
+				<a href = "/tl3">Evidence (TL3)</a> |
+				<a href = "/tl4">Crafting (TL4)</a>
+			</p>
+			<p><b>&copy; 2023 BIBS·C Tech Tips</b></p> 
+		</footer>
+
+        <button onclick='window.scrollTo({top: 0, behavior: "smooth"});' id="topbutton" title="Go to top">Top</button>
+
+        <script type = "text/javascript">   
+            function $(x){
+                return document.getElementById(x);
+            }
+            // Get the button:
+            window.addEventListener("scroll", scroll);
+            function scroll() {
+                if(document.body.scrollTop > $("bar").offsetTop || document.documentElement.scrollTop > $("bar").offsetTop){
+                    $("topbutton").style.display = "block";
+                } 
+                else{
+                    $("topbutton").style.display = "none";
+                }
+            }
+
+            var filters = document.querySelectorAll('.checkf');
+            <%for(var i = 0; i < checked.length; i++){ %>
+                console.log("<%=checked[i]%>")
+                filters[<%=i%>].checked = <%=checked[i];%>
+            <%}%>
+        </script>
+    </body>
+</html>

@@ -1,0 +1,140 @@
+<html>
+    <head>
+        <title>TL2: Strategies</title>
+        <link rel = "stylesheet" href = "../public/main.css">
+        <link rel = "icon" type = "image/png" href = "/images/favicon.png">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1">
+        <meta charset = "utf-8">
+    </head>
+    <body>
+        <div id = "topbar">
+            <h1>BIBS·C Tech Tools</h1>
+        </div> 
+        <div id = "navbar">
+            <ul id = "nav">
+                <a href = "/"><li>Home</li><div class = "underline"></div></a>
+                <a href = "/tl1"><li>Knowing (TL1)</li><div class = "underline"></div></a>
+                <a href = "/tl2"><li>Strategies (TL2)</li><div class = "underline"></div></a>
+                <a href = "/tl3"><li>Evidence (TL3)</li><div class = "underline"></div></a>
+                <a href = "/tl4"><li>Crafting (TL4)</li><div class = "underline"></div></a>   
+                <span id = "search">
+                    <form action="/searchpage/:query" method="get">
+                        <input type="text" name="query" placeholder="Search">
+                        <input type="submit" value="Search">
+                    </form>    
+                </span>     
+            </ul>           
+        </div>
+
+        <div id = "subhead">
+            <h1 id="test">TL2: Strategies for Learning</h1>
+            <h3>Filter by strand:</h3>
+            <form class = "filters" method = "post" action='/tl2'>
+                <div class = "label">
+                    <span class = "n1">Understanding <input type = "checkbox" name = "s1" class = "checkf" value = "1" onchange='this.form.submit()'></span>
+                    <div class = "overlay">In order to meet specific learning objectives, the teacher ensures that understanding is explored, constructed and confirmed by the class.</div>
+                </div>
+                <div class = "label">
+                    <span class = "n2">Multi-Dimensional Learning <input type = "checkbox" name = "s2" class = "checkf" value = "1" onchange='this.form.submit()'></span>
+                    <div class = "overlay">Teachers construct multi-dimensional learning experiences that are relevant to the student, embedded in real-world contexts and often student-initiated.</div>
+                </div>
+                <div class = "label">
+                    <span class = "n3">Reasoned Arguments <input type = "checkbox" name = "s3" class = "checkf" value = "1" onchange='this.form.submit()'></span>
+                    <div class = "overlay">Teachers enable students to use reasoned arguments and active listening as an integral part of knowledge building and diverse perspectives are welcomed and considered.</div>
+                </div>
+                <div class = "label">
+                    <span class = "n4">Repertoire of Techniques <input type = "checkbox" name = "s4" class = "checkf" value = "1" onchange='this.form.submit()'></span>
+                    <div class = "overlay">Teachers employ a repertoire of techniques, including whole class instruction, whole class collective discussion, paired talk and small group dialogue to support learning. </div>
+                </div>
+                <div class = "label">
+                    <span class = "n5">Learning Spaces <input type = "checkbox" name = "s5" class = "checkf" value = "1" onchange='this.form.submit()'></span>
+                    <div class = "overlay">Teachers purposefully design learning spaces to promote the intended learning impact.</div>
+                </div>
+            </form>
+        </div>
+
+        <div id = "bar">&nbsp;</div>
+        
+        <div id = "all">
+            <br>    
+            <div class = "techtip-wrap">
+                <% let add = 0; %>
+                
+                <% for(let i=0; i<content[0].length; i++){ %>
+                <% if((content[1][i]["U"]&&checked[0])||(content[1][i]["MDL"]&&checked[1])||(content[1][i]["RA"]&&checked[2])||(content[1][i]["RoTech"]&&checked[3])||(content[1][i]["LS"]&&checked[4])){ %>
+                <% add++ %>
+                <div class = "techtip">
+                    <div class = "line" id = "<%=content[0][i]["id"]%>"></div>
+                    <h3 class="name"><%= content[0][i]["techname"] %></h3>
+                    <div class = "tags">
+                        <% if(content[1][i]["U"]){ %>
+                            <span class = "n1">Understanding</span>
+                        <% } %>
+                        <% if(content[1][i]["MDL"]){ %>
+                            <span class = "n2">Multi-Dimensional Learning</span>
+                        <% } %>
+                        <% if(content[1][i]["RA"]){ %>
+                            <span class = "n3">Reasoned Arguments</span>
+                        <% } %>
+                        <% if(content[1][i]["RoTech"]){ %>
+                            <span class = "n4">Repertoire of Techniques</span>
+                        <% } %>
+                        <% if(content[1][i]["LS"]){ %>
+                            <span class = "n5">Learning Spaces</span>
+                        <% } %>
+                    </div>
+                    <div class = "info">
+                        <div class = "img"><img src = "/images/<%=content[0][i]["id"]%>.png"></div>
+                        <div class = "desc"><%= content[0][i]["tl2_desc"] %></div>
+                        <div class = "link">
+                            <ul>
+                                <li><a href = "<%= content[0][i]["link"] %>"  target="_blank"><%= content[0][i]["displaytext"] %></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <% } %> 
+                <% } %>
+                <% if(add==0){ %>
+                    <div>
+                        <h4>No results here match your filters.</h4>
+                    </div>
+                <% } %>
+            </div>
+            <br>
+        </div>
+        <footer>
+			<p>
+				<a href = "/tl1">Knowing (TL1)</a> | 
+				<a href = "/tl2">Strategies (TL2)</a> |
+				<a href = "/tl3">Evidence (TL3)</a> |
+				<a href = "/tl4">Crafting (TL4)</a>
+			</p>
+			<p><b>&copy; 2023 BIBS·C Tech Tips</b></p> 
+		</footer>
+
+        <button onclick='window.scrollTo({top: 0, behavior: "smooth"});' id="topbutton" title="Go to top">Top</button>
+
+        <script type = "text/javascript">   
+            function $(x){
+                return document.getElementById(x);
+            }
+            // Get the button:
+            window.addEventListener("scroll", scroll);
+            function scroll() {
+                if(document.body.scrollTop > $("bar").offsetTop || document.documentElement.scrollTop > $("bar").offsetTop){
+                    $("topbutton").style.display = "block";
+                } 
+                else{
+                    $("topbutton").style.display = "none";
+                }
+            }
+
+            var filters = document.querySelectorAll('.checkf');
+            <%for(var i = 0; i < checked.length; i++){ %>
+                console.log("<%=checked[i]%>")
+                filters[<%=i%>].checked = <%=checked[i];%>
+            <%}%>
+        </script>
+    </body>
+</html>

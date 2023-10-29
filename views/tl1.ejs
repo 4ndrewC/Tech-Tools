@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <title>TL1: Knowing</title>
+        <link rel = "stylesheet" href = "/public/main.css">
+        <link rel = "icon" type = "image/png" href = "/images/favicon.png">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1">
+        <meta charset = "utf-8">
+    </head>
+    <body>
+        <div id = "topbar">
+            <h1>BIBS·C Tech Tools</h1>
+        </div> 
+        
+        <div id = "navbar">
+            <ul id = "nav">
+                <a href = "/"><li>Home</li><div class = "underline"></div></a>
+                <a href = "/tl1"><li>Knowing (TL1)</li><div class = "underline"></div></a>
+                <a href = "/tl2"><li>Strategies (TL2)</li><div class = "underline"></div></a>
+                <a href = "/tl3"><li>Evidence (TL3)</li><div class = "underline"></div></a>
+                <a href = "/tl4"><li>Crafting (TL4)</li><div class = "underline"></div></a>      
+                <span id = "search">
+                    <form action="/searchpage/:query" method="get">
+                        <input type="text" name="query" placeholder="Search">
+                        <input type="submit" value="Search">
+                    </form>    
+                </span>       
+            </ul>
+        </div>
+
+        <div id = "subhead">
+            <h1 id="test">TL1: Knowing Our Students</h1>
+            <h3>Filter by strand:</h3>
+            <form class = "filters" method = "post" action='/tl1'>
+                <div class = "label">
+                    <span class = "n1">Relationships <input type = "checkbox" name = "s1" class = "checkf" value = "1" onchange='this.form.submit()'></span>
+                    <div class = "overlay">Teacher/student relationships are proactive and postive. </div>
+                </div>
+                <div class = "label">
+                    <span class = "n2">Teacher Planning <input type = "checkbox" name = "s2" class = "checkf" value = "1" onchange='this.form.submit()'></span>
+                    <div class = "overlay">Teacher planning is driven by knowledge of each student's next steps for learning.</div>
+                </div>
+                <div class = "label">
+                    <span class = "n3">Modify their Teaching <input type = "checkbox" name = "s3" class = "checkf" value = "1" onchange='this.form.submit()'></span>
+                    <div class = "overlay">Teachers modify their teaching based on what students need to succeed.</div>
+                </div>
+                <div class = "label">
+                    <span class = "n4">Achieve Readiness <input type = "checkbox" name = "s4" class = "checkf" value = "1" onchange='this.form.submit()'></span>
+                    <div class = "overlay">Teachers achieve readiness for learning by constructing tasks or offering learning choices at different levels of complexity.</div>
+                </div>
+            </form>
+        </div>
+
+        <div id = "bar">&nbsp;</div>
+        <div id = "all">
+            <br>
+            <div class = "techtip-wrap">
+                <% let add = 0; %>
+                
+                <% for(let i=0; i<content[0].length; i++){ %>
+                <% if((content[1][i]["R"]&&checked[0])||(content[1][i]["TP"]&&checked[1])||(content[1][i]["MT"]&&checked[2])||(content[1][i]["AR"]&&checked[3])){ %>
+                <% add++ %>
+                <div class = "techtip" id = "<%=i%>">
+                    <div class = "line" id = "<%=content[0][i]["id"]%>"></div>
+                    <h3 class="name"><%= content[0][i]["techname"] %></h3>
+                    <div class = "tags">
+                        <% if(content[1][i]["R"]){ %>
+                            <span class = "n1">Relationships</span>
+                        <% } %>
+                        <% if(content[1][i]["TP"]){ %>
+                            <span class = "n2">Teacher Planning</span>
+                        <% } %>
+                        <% if(content[1][i]["MT"]){ %>
+                            <span class = "n3">Modify their Teaching</span>
+                        <% } %>
+                        <% if(content[1][i]["AR"]){ %>
+                            <span class = "n4">Achieve Readiness</span>
+                        <% } %>
+                    </div>
+                    <div class = "info">
+                        <div class = "img"><img src = "/images/1.png"></div>
+                        <div class = "desc"><%= content[0][i]["tl1_desc"] %></div>
+                        <div class = "link">
+                            <ul>
+                                <li><a href = "<%= content[0][i]["link"] %>"  target="_blank"> <%= content[0][i]["displaytext"] %></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <% } %> 
+                <% } %>
+
+                <% if(add==0){ %>
+                    <div>
+                        <h4>No results here match your filters.</h4>
+                    </div>
+                <% } %>
+            </div>
+            <br>
+        </div>
+        <footer>
+			<p>
+				<a href = "/tl1">Knowing (TL1)</a> | 
+				<a href = "/tl2">Strategies (TL2)</a> |
+				<a href = "/tl3">Evidence (TL3)</a> |
+				<a href = "/tl4">Crafting (TL4)</a>
+			</p>
+			<p><b>&copy; 2023 BIBS·C Tech Tips</b></p> 
+		</footer>
+        <button onclick='window.scrollTo({top: 0, behavior: "smooth"});' id="topbutton" title="Go to top">Top</button>
+
+        <script type = "text/javascript">   
+            function $(x){
+                return document.getElementById(x);
+            }
+            // Get the button:
+            window.addEventListener("scroll", scroll);
+            function scroll() {
+                if(document.body.scrollTop > $("bar").offsetTop || document.documentElement.scrollTop > $("bar").offsetTop){
+                    $("topbutton").style.display = "block";
+                } 
+                else{
+                    $("topbutton").style.display = "none";
+                }
+            }
+
+            var filters = document.querySelectorAll('.checkf');
+            <%for(var i = 0; i < checked.length; i++){ %>
+                console.log("<%=checked[i]%>")
+                filters[<%=i%>].checked = <%=checked[i];%>
+            <%}%>
+        </script>
+    </body>
+</html>

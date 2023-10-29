@@ -1,0 +1,121 @@
+<div class="box"><a class="button" href="#popup1">Edit</a></div>
+
+
+<div id="popup1" class="overlay">
+					<div class="popup">
+						<h2>Edit the techtools </h2>
+						<a class="close" href="#">&times;</a>
+					<form action="/admin/edit" method="post" id="form" >    
+				<div align="center" id="">
+					
+						<p class="left">Enter the techtool id you are editing:<br>
+							<input type="text" name="id1" placeholder="id%>" align="center" id = "id1"><br></p>
+						
+						<p class="left">Edited Tool Name:<br>
+						<input type="text" name="Techname" placeholder="techname%>" id = "Techname"><br></p>
+						<p class="left">Edited Description<br>  
+						<input type="text" name="description" placeholder="description%>" id = "description"><br></p>
+						
+						</p>       
+						<p class="left">Edited Link<br>  
+						<input type="text" name="Link" placeholder="link%>" id = "Link"><br></p>
+						
+						</p>       
+					<p class="left">Edited display text <br>  
+						<input type="text" name="display" placeholder="displaytext%>" id = "display"><br></p>
+						
+						</p>   
+									
+						
+						<button type="submit" id = "btn" value="Upload">Submit</button>
+						
+					</form>
+				</div>
+					</div>
+
+
+
+                    //  document.forms['editTech'].elements['Techname'].value = <%=results[clicked_id].techname%>
+	// document.forms['editTech'].elements['description'].value =<%=results[clicked_id].description%>
+	// document.forms['editTech'].elements['Link'].value = <%=results[clicked_id].link%>
+	// document.forms['editTech'].elements['display'].value =<%=results[clicked_id].displaytext%>
+
+
+    , <%=results[i].description%>, <%=results[i].link%>, <%=results[i].displaytext%> 
+
+
+		 <ul class="categorychecklist form-no-clear">
+					 	<li class="popular-category">
+							<label class="selectit">
+							<input type="checkbox" name="R">Teacher Planning &nbsp
+							</label>
+						</li>
+					
+						<li class="popular-category">
+							<label class="selectit">
+							<input type="checkbox" name="R">Modify Their Teaching &nbsp
+							</label>
+						</li>
+						<li class="popular-category">
+							<label class="selectit">
+							<input type="checkbox" name="R">Achieve Readiness
+							</label>
+						</li>
+						<li class="popular-category">
+							<label class="selectit">
+							<input type="checkbox" name="R">Understanding
+							</label>
+						</li>
+						<li class="popular-category">
+							<label class="selectit">
+							<input type="checkbox" name="R">Mulit-Dimensional Learning
+							</label>
+						</li>
+						<li class="popular-category">
+							<label class="selectit">
+							<input type="checkbox" name="R">Reasoned Arguments
+							</label>
+						</li>
+						<li class="popular-category">
+							<label class="selectit">
+							<input type="checkbox" name="R">Repertoire of Techniques
+							</label>
+						</li>	<% /* %>
+						<li class="popular-category">
+							<label class="selectit">
+							<input type="checkbox" name="R">Learning Spaces
+							</label>
+						</li>
+						
+						<li class="popular-category">
+							<label class="selectit">
+							<input type="checkbox" name="R">Reflect on Thinking
+							</label>
+						</li>
+						<li class="popular-category">
+							<label class="selectit">
+							<input type="checkbox" name="R">Evidence of Student Learning
+							</label>
+						</li>
+						<li class="popular-category">
+							<label class="selectit">
+							<input type="checkbox" name="R">Employ Feedback
+							</label>
+						</li>
+						<li class="popular-category">
+							<label class="selectit">
+							<input type="checkbox" name="R">Risk Taking Environment
+							</label>
+						</li>
+						<li class="popular-category">
+							<label class="selectit">
+							<input type="checkbox" name="R">Deepening Lines of Inquiry
+							</label>
+						</li>
+						<li class="popular-category">
+							<label class="selectit">
+							<input type="checkbox" name="R">Responsibility and Aspects of Citizenship
+							</label>
+						</li>
+						<% */ %>
+					</ul>
